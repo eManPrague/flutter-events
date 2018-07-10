@@ -20,7 +20,13 @@ abstract class WidgetFactory {
     return _instance;
   }
 
-  Widget createAppWidget({String title, Widget home});
+  Widget createAppWidget({
+    String title = '',
+    GenerateAppTitle onGenerateTitle,
+    Widget home,
+    Iterable<LocalizationsDelegate> localizationsDelegates,
+    Iterable<Locale> supportedLocales,
+  });
 
   Widget createScaffold({PreferredSizeWidget appBar, Widget body});
 
@@ -29,8 +35,20 @@ abstract class WidgetFactory {
 
 class _AndroidWidgetFactory implements WidgetFactory {
   @override
-  Widget createAppWidget({String title, Widget home}) {
-    return MaterialApp(title: title, home: home);
+  Widget createAppWidget({
+    String title = '',
+    GenerateAppTitle onGenerateTitle,
+    Widget home,
+    Iterable<LocalizationsDelegate> localizationsDelegates,
+    Iterable<Locale> supportedLocales,
+  }) {
+    return MaterialApp(
+      title: title,
+      onGenerateTitle: onGenerateTitle,
+      home: home,
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
+    );
   }
 
   @override
@@ -46,8 +64,20 @@ class _AndroidWidgetFactory implements WidgetFactory {
 
 class _IOSWidgetFactory implements WidgetFactory {
   @override
-  Widget createAppWidget({String title, Widget home}) {
-    return MaterialApp(title: title, home: home);
+  Widget createAppWidget({
+    String title = '',
+    GenerateAppTitle onGenerateTitle,
+    Widget home,
+    Iterable<LocalizationsDelegate> localizationsDelegates,
+    Iterable<Locale> supportedLocales,
+  }) {
+    return MaterialApp(
+      title: title,
+      onGenerateTitle: onGenerateTitle,
+      home: home,
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
+    );
   }
 
   @override
