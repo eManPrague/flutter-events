@@ -7,8 +7,9 @@ import 'package:flutter_events/widget_factory.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:lorem/lorem.dart';
 
+final format = DateFormat('yyyy-MM-dd HH:mm');
+
 class EventListState extends State<EventList> {
-  static final format = DateFormat('yyyy-MM-dd HH:mm');
   static final lorem = Lorem();
 
   final _events = List<Event>();
@@ -66,23 +67,61 @@ class EventListState extends State<EventList> {
   }
 
   void _itemClicked(Event event) {
-    Navigator.of(context).push(
-          WidgetFactory().createPageRoute(
-            builder: (context) => WidgetFactory().createScaffold(
-                  appBar: WidgetFactory().createAppBar(
-                    title:
-                        Text(EventsLocalizations.of(context).detailScreenTitle),
-                  ),
-                  body: Center(
-                    child: Text('Detail screen'),
-                  ),
-                ),
-          ),
-        );
+    Navigator.of(context).push(WidgetFactory()
+        .createPageRoute(builder: (context) => EventDetail(event)));
   }
 }
 
 class EventList extends StatefulWidget {
   @override
   State<EventList> createState() => EventListState();
+}
+
+class EventDetail extends StatelessWidget {
+  final Event _event;
+
+  EventDetail(this._event);
+
+  @override
+  Widget build(BuildContext context) {
+    return WidgetFactory().createScaffold(
+      appBar: WidgetFactory().createAppBar(
+        title: Text(EventsLocalizations.of(context).detailScreenTitle),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                _event.name,
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Text(
+              format.format(_event.dateTime),
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.grey[500],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 14.0),
+              child: WidgetFactory().createDivider(),
+            ),
+            Text(
+              _event.description,
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
