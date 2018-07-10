@@ -31,6 +31,8 @@ abstract class WidgetFactory {
   Widget createScaffold({PreferredSizeWidget appBar, Widget body});
 
   PreferredSizeWidget createAppBar({Widget title});
+
+  Widget createDivider();
 }
 
 class _AndroidWidgetFactory implements WidgetFactory {
@@ -60,6 +62,9 @@ class _AndroidWidgetFactory implements WidgetFactory {
   PreferredSizeWidget createAppBar({Widget title}) {
     return AppBar(title: title);
   }
+
+  @override
+  Widget createDivider() => Divider();
 }
 
 class _IOSWidgetFactory implements WidgetFactory {
@@ -89,4 +94,7 @@ class _IOSWidgetFactory implements WidgetFactory {
   PreferredSizeWidget createAppBar({Widget title}) {
     return CupertinoNavigationBar(middle: title);
   }
+
+  @override
+  Widget createDivider() => Divider();
 }

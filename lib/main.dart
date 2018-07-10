@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_events/events.dart';
 import 'package:flutter_events/events_localizations.dart';
 import 'package:flutter_events/widget_factory.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,9 +10,7 @@ class EventsAppHome extends StatelessWidget {
         appBar: WidgetFactory().createAppBar(
           title: Text(EventsLocalizations.of(context).homeScreenTitle),
         ),
-        body: Center(
-          child: Text('Centered text'),
-        ),
+        body: EventList(),
       );
 }
 
