@@ -7,7 +7,7 @@ class EventsAppHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) => WidgetFactory().createScaffold(
         appBar: WidgetFactory().createAppBar(
-          title: Text('Events'),
+          title: Text(EventsLocalizations.of(context).homeScreenTitle),
         ),
         body: Center(
           child: Text('Centered text'),
