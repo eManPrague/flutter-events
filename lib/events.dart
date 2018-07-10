@@ -1,27 +1,31 @@
-import 'package:english_words/english_words.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_events/events_localizations.dart';
 import 'package:flutter_events/models.dart';
 import 'package:flutter_events/widget_factory.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:lorem/lorem.dart';
 
 final format = DateFormat('yyyy-MM-dd HH:mm');
 
 class EventListState extends State<EventList> {
-  static final lorem = Lorem();
-
   final _events = List<Event>();
 
   @override
   void initState() {
     super.initState();
-    _events.addAll(generateWordPairs().take(10).map((pair) => Event(
-          pair.asPascalCase,
-          DateTime.now(),
-          lorem.createParagraph(),
-        )));
+    Firestore.instance
+        .collection('events')
+        .orderBy('date_time')
+        .snapshots()
+        .listen((event) => setState(() {
+              _events.clear();
+              _events.addAll(event.documents.map((snapshot) => Event(
+                    snapshot.data['name'],
+                    DateTime.parse('${snapshot.data['date_time']}z'),
+                    snapshot.data['description'],
+                  )));
+            }));
   }
 
   @override
