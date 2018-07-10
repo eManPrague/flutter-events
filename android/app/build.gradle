@@ -1,0 +1,65 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def gradleProperties = new Properties()
+def gradlePropertiesFile = rootProject.file('gradle.properties')
+if (gradlePropertiesFile.exists()) {
+    gradlePropertiesFile.withReader('UTF-8') { reader ->
+        gradleProperties.load(reader)
+    }
+}
+def flutterVersionCode = gradleProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    throw new GradleException("versionCode not found. Define flutter.versionCode in the gradle.properties file.")
+}
+
+def flutterVersionName = gradleProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    throw new GradleException("versionName not found. Define flutter.versionName in the gradle.properties file.")
+}
+
+apply plugin: 'com.android.application'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    compileSdkVersion 28
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    defaultConfig {
+        applicationId "cz.eman.flutter.events"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

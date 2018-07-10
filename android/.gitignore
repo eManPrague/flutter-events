@@ -1,0 +1,13 @@
+*.iml
+*.class
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/caches
+/.idea/markdown-navigator
+/.idea/sonarlint
+.DS_Store
+/build
+/captures
+GeneratedPluginRegistrant.java
