@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 enum StringId {
   appTitle,
   homeScreenTitle,
+  detailScreenTitle,
 }
 
 class EventsLocalizations {
@@ -15,10 +16,12 @@ class EventsLocalizations {
     'en': {
       StringId.appTitle: 'Eman\'s events',
       StringId.homeScreenTitle: 'Events',
+      StringId.detailScreenTitle: 'Event detail',
     },
     'cs': {
       StringId.appTitle: 'Eman\'s events',
       StringId.homeScreenTitle: 'Akce',
+      StringId.detailScreenTitle: 'Detail akce',
     },
   };
 
@@ -33,6 +36,8 @@ class EventsLocalizations {
   String get appTitle => _localizedValues[_locale.languageCode][StringId.appTitle];
 
   String get homeScreenTitle => _localizedValues[_locale.languageCode][StringId.homeScreenTitle];
+
+  String get detailScreenTitle => _localizedValues[_locale.languageCode][StringId.detailScreenTitle];
 }
 
 class _EventsLocalizationsDelegate extends LocalizationsDelegate<EventsLocalizations> {

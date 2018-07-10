@@ -33,6 +33,8 @@ abstract class WidgetFactory {
   PreferredSizeWidget createAppBar({Widget title});
 
   Widget createDivider();
+
+  Route createPageRoute({WidgetBuilder builder});
 }
 
 class _AndroidWidgetFactory implements WidgetFactory {
@@ -65,6 +67,11 @@ class _AndroidWidgetFactory implements WidgetFactory {
 
   @override
   Widget createDivider() => Divider();
+
+  @override
+  Route createPageRoute({WidgetBuilder builder}) {
+    return MaterialPageRoute(builder: builder);
+  }
 }
 
 class _IOSWidgetFactory implements WidgetFactory {
@@ -97,4 +104,9 @@ class _IOSWidgetFactory implements WidgetFactory {
 
   @override
   Widget createDivider() => Divider();
+
+  @override
+  Route createPageRoute({WidgetBuilder builder}) {
+    return MaterialPageRoute(builder: builder);
+  }
 }
