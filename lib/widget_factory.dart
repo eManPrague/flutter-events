@@ -99,7 +99,7 @@ class _IOSWidgetFactory implements WidgetFactory {
 
   @override
   PreferredSizeWidget createAppBar({Widget title}) {
-    return CupertinoNavigationBar(middle: title);
+    return CupertinoNavigationBar(middle: title, backgroundColor: Colors.white);
   }
 
   @override
